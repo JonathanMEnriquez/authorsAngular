@@ -3,10 +3,14 @@
   <p>We have quotes by:</p>
 </div>
 <div id="table">
-  <table>
+  <table *ngIf="allAuthors != undefined" >
     <tr>
       <th>Author</th>
       <th>Actions Available</th>
+    </tr>
+    <tr *ngFor="let author of allAuthors.data" >
+      <td>{{author.name}}</td>
+      <td><button [routerLink]="['edit/'+author._id]">Edit</button> <button (click)="deleteAuthor(author._id)">Delete</button></td>
     </tr>
   </table>
 </div>

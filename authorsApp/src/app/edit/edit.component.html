@@ -1,3 +1,12 @@
-<p>
-  edit works!
-</p>
+<div id="body">
+  <button (click)="goHome()">Home</button>
+  <p>Edit this author</p>
+</div>
+<div id="outerBox">
+  <p>Name: </p>
+  <form (submit)="editAuthor()">
+    <input type="text" [(ngModel)]="author.name" name="authorInput">
+    <button (click)="clearField()">Cancel</button>
+    <input type="submit" value="Submit">
+  </form>
+</div>

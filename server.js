@@ -16,6 +16,28 @@ var authorsSchema = new mongoose.Schema({
 mongoose.model('Authors', authorsSchema);
 var Author = mongoose.model('Authors');
 
+app.get('/api/authors', function(req, res) {
+    Author.find({}, function(err, authors) {
+        if (err) {
+            console.log(err);
+            res.json({ message: "Error", errors: err });
+        } else {
+            res.json({ message: "Got all Authors", data: authors });
+        }
+    })
+})
+
+app.get('/api/authors/:id', function(req, res) {
+    Author.findOne({ _id: req.params.id }, function(err, author) {
+        if (err) {
+            console.log(err);
+            res.json({ message: "Error", errors: err });
+        } else {
+            res.json({ message: "Successfully got one", data: author });
+        }
+    })
+})
+
 app.post('/api/authors', function(req, res) {
     let newAuthor = new Author(req.body);
     console.log(newAuthor);
@@ -26,6 +48,28 @@ app.post('/api/authors', function(req, res) {
         } else {
             console.log(data);
             res.json({ message: "Successfully added to the db!", data: data });
+        }
+    })
+})
+
+app.put('/api/authors/:id', function(req, res) {
+    Author.update({_id: req.params.id}, {name: req.body.name}, function(err, author) {
+        if (err) {
+            console.log(err);
+            res.json({ message: "Error", errors: err });
+        } else {
+            res.json({ message: "Successfully updated", data: author });
+        }
+    })
+})
+
+app.delete('/api/authors/:id', function(req, res) {
+    Author.remove({ _id: req.params.id }, function(err) {
+        if (err) {
+            console.log(err);
+            res.json({ message: "Error", errors: err });
+        } else {
+            res.json({message: "Successfully deleted from the db"});
         }
     })
 })
