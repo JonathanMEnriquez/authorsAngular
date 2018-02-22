@@ -1,0 +1,19 @@
+<div id="body" *ngIf="author != undefined" >
+  <a [routerLink]="['']">Home</a>
+  <a [routerLink]="['/write/'+author._id]">Add quote</a>
+  <p>We have quotes by: {{author.name}}</p>
+</div>
+<div id="table">
+  <table *ngIf="author != undefined" >
+    <tr>
+      <th>Quote</th>
+      <th>Votes</th>
+      <th>Actions Available</th>
+    </tr>
+    <tr  *ngFor="let quote of author.quotes; let i = index" >
+      <td>{{author.quotes[i].content}}</td>
+      <td>{{author.quotes[i].score}}</td>
+      <td><button (click)="upVote(i)">Vote up</button> <button (click)="downVote(i)">Vote down</button> <button (click)="deleteQuote()">Delete</button></td>
+    </tr>
+  </table>
+</div>

@@ -3,6 +3,7 @@ var bodyParser = require('body-parser');
 var path = require('path');
 var mongoose = require('mongoose');
 var app = express();
+var Schema = mongoose.Schema;
 
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, './authorsApp', '/dist')));
@@ -10,8 +11,10 @@ mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/authorsApp');
 
 var authorsSchema = new mongoose.Schema({
-    name: {type: String, required: true, minlength: 3}
+    name: {type: String, required: true, minlength: 3},
+    quotes: {type: Array}
 }, {timestamps: true});
+
 
 mongoose.model('Authors', authorsSchema);
 var Author = mongoose.model('Authors');
@@ -53,7 +56,7 @@ app.post('/api/authors', function(req, res) {
 })
 
 app.put('/api/authors/:id', function(req, res) {
-    Author.update({_id: req.params.id}, {name: req.body.name}, function(err, author) {
+    Author.update({_id: req.params.id}, {name: req.body.name, quotes: req.body.quotes}, function(err, author) {
         if (err) {
             console.log(err);
             res.json({ message: "Error", errors: err });

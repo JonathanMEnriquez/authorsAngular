@@ -1,0 +1,15 @@
+<div id="body" *ngIf="author.name != ''" >
+  <a [routerLink]="['']">Home</a>
+  <p>Provide a quote by {{author.name}}:</p>
+</div>
+<div *ngIf="errors != undefined" >
+  <p>{{errors}}</p>
+</div>
+<div id="form">
+  <form (submit)="addQuote()">
+    <p>Quote:</p>
+    <input type="text" name="quoteField" [(ngModel)]="newQuote.content">
+    <button (click)="clearField()">Cancel</button>
+    <input type="submit" value="Submit">
+  </form>
+</div>

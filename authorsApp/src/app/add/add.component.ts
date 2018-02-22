@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add',
@@ -8,7 +9,7 @@ import { ApiService } from '../api.service';
 })
 export class AddComponent implements OnInit {
 
-  constructor(private _apiService: ApiService) { }
+  constructor(private _apiService: ApiService, private _router: Router) { }
 
   newAuthor:any = { name: "" };
   error:String = "";
@@ -19,6 +20,7 @@ export class AddComponent implements OnInit {
 
   clearField(){
     this.newAuthor.name = "";
+    this._router.navigate(['']);
   }
 
   addAuthor(){

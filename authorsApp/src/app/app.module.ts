@@ -11,6 +11,8 @@ import { AllComponent } from './all/all.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ApiService } from './api.service';
+import { QuotesComponent } from './quotes/quotes.component';
+import { NewQuotesComponent } from './new-quotes/new-quotes.component';
 
 
 @NgModule({
@@ -19,6 +21,8 @@ import { ApiService } from './api.service';
     AllComponent,
     AddComponent,
     EditComponent,
+    QuotesComponent,
+    NewQuotesComponent,
   ],
   imports: [
     BrowserModule,
